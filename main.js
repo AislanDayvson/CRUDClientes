@@ -4,13 +4,6 @@ const closeModal = () => {
     document.getElementById('modal').classList.remove('active')
 }
 
-const tempClient = {
-    nome: "Leo",
-    email: "leo@gmail.com",
-    celular: "984583454",
-    cidade: "Recife"
-}
-
 const getLocalstorage = () => JSON.parse(localStorage.getItem('db_client')) ?? []
 const setLocalstorage = (dbClient) => localStorage.setItem("db_client", JSON.stringify(dbClient))
 
@@ -21,6 +14,11 @@ const isValidFields = () => {
 const clearFields = () => {
     const campos = document.querySelectorAll('.modal-field')
     campos.forEach(field => { field.value = ''})
+}
+
+const clearTable = () => {
+    const rows = document.querySelectorAll('#tbClient>tbody tr')
+    rows.forEach(row => row.parentNode.removeChild(row))
 }
 // CRUD - CREATE / READ / UPDATE / DELETE
 
@@ -59,9 +57,33 @@ const saveClient = () => {
         }
         createClient(client)
         alert('Cliente cadastrado!')
+        updateTable()
         closeModal()
     }
 }
+
+const updateTable = () => {
+    const db_client = readClient()
+    clearTable()
+    db_client.forEach(createRow)
+}
+
+const createRow = (client) => {
+    const newRow = document.createElement('tr')
+    newRow.innerHTML = ` 
+                    <td>${client.nome}</td>
+                    <td>${client.email}</td>
+                    <td>${client.celular}</td>
+                    <td>${client.cidade}</td>
+                    <td>
+                        <button type="button" class="button green">editar</button>
+                        <button type="button" class="button red">excluir</button>
+                    </td>
+    ` 
+    document.querySelector('#tbClient>tbody').appendChild(newRow)
+}
+
+updateTable()
 
 // Eventos
 document.getElementById('cadastrarCliente').addEventListener('click', openModal)
