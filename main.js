@@ -29,6 +29,13 @@ const updateClient = (index, client) => {
     setLocalstorage(db_client)
 }
 
+// CRUD => DELETE
+const deleteClient = (index) => {
+    const db_client = readClient()
+    db_client.splice(index, 1)
+    setLocalstorage(db_client)
+}
+
 // Eventos
 document.getElementById('cadastrarCliente').addEventListener('click', openModal)
 document.getElementById('modalClose').addEventListener('click', closeModal)
