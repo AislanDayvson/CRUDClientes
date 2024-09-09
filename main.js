@@ -3,7 +3,7 @@ const closeModal = () => document.getElementById('modal').classList.remove('acti
 
 const tempClient = {
     nome: "Leo",
-    email: "aislan@gmail.com",
+    email: "leo@gmail.com",
     celular: "984583454",
     cidade: "Recife"
 }
@@ -18,6 +18,9 @@ const createClient = (client) => {
     db_client.push(client)
     setLocalstorage(db_client)
 }
+
+// CRUD => READ
+const readClient = () => getLocalstorage()
 
 // Eventos
 document.getElementById('cadastrarCliente').addEventListener('click', openModal)
