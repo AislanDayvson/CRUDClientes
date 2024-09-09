@@ -22,6 +22,13 @@ const createClient = (client) => {
 // CRUD => READ
 const readClient = () => getLocalstorage()
 
+// CRUD => UPDATE
+const updateClient = (index, client) => {
+    const db_client = readClient()
+    db_client[index] = client
+    setLocalstorage(db_client)
+}
+
 // Eventos
 document.getElementById('cadastrarCliente').addEventListener('click', openModal)
 document.getElementById('modalClose').addEventListener('click', closeModal)
